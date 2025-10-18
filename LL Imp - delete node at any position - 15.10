@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void deleteNode(Node*& head, int position) {
+    if (!head) return;
+    Node* temp = head;
+    if (position == 1) {
+        head = head->next;
+        delete temp;
+        return;
+    }
+    Node* prev = nullptr;
+    for (int i = 1; i < position && temp != nullptr; i++) {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (!temp) return;
+    prev->next = temp->next;
+    delete temp;
+}
+
+void printList(Node* head) {
+    while (head) {
+        cout << head->data << " -> ";
+        head = head->next;
+    }
+    cout << "NULL\n";
+}
+
+int main() {
+    Node* head = new Node{10, new Node{20, new Node{30, nullptr}}};
+    cout << "Original List: ";
+    printList(head);
+    deleteNode(head, 2);
+    cout << "After deleting position 2: ";
+    printList(head);
+    return 0;
+}
