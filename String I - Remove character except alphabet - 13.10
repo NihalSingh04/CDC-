@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+  string s;
+  cout << "Enter a string: ";
+  getline(cin, s);
+
+  string result = "";
+  for (char c : s)
+  {
+    if (isalpha(c))
+      result += c;
+  }
+
+  cout << "String after removing non-alphabets: " << result << endl;
+
+  return 0;
+}
+
+/*
+Explanation:
+- We check each character using isalpha().
+- If it’s a letter, keep it; otherwise skip.
+- No extra logic needed.
+
+Example:
+Input: "H3ll0 W@rld!"
+Output: "HllWrld"
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+*/
