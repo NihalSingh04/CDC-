@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+
+    int maxSum = nums[0];
+    int currSum = 0;
+
+    for (int i = 0; i < nums.size(); i++) {
+        currSum += nums[i];
+
+        // Update maximum sum found so far
+        maxSum = max(maxSum, currSum);
+
+        // If current sum becomes negative, reset to 0
+        if (currSum < 0) currSum = 0;
+    }
+
+    cout << "Maximum Subarray Sum = " << maxSum << endl;
+    return 0;
+}
+
+/*
+Explanation:
+- We keep adding numbers to current sum.
+- If current sum drops below 0, it won’t help future subarrays, so reset it.
+- Keep track of the maximum sum seen so far.
+
+Example walkthrough:
+[-2,1,-3,4,-1,2,1,-5,4]
+=> Maximum sum is from [4,-1,2,1] = 6
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
