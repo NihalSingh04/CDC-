@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  vector<int> nums = {2, 2, 1, 1, 1, 2, 2};
+
+  int candidate = -1;
+  int count = 0;
+
+  // Find the candidate
+  for (int num : nums)
+  {
+    if (count == 0)
+      candidate = num;
+    if (num == candidate)
+      count++;
+    else
+      count--;
+  }
+
+  count = 0;
+  for (int num : nums)
+    if (num == candidate)
+      count++;
+  if (count > nums.size() / 2)
+    cout << "Majority Element = " << candidate << endl;
+  else
+    cout << "No Majority Element" << endl;
+
+  return 0;
+}
+
+/*
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
