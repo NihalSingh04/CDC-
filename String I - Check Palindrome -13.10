@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+  string s;
+  cout << "Enter a string: ";
+  getline(cin, s);
+
+  // Convert to lowercase for case-insensitive check
+  for (auto &ch : s)
+    ch = tolower(ch);
+
+  // Remove spaces and non-alphabetic characters
+  string clean = "";
+  for (char c : s)
+    if (isalpha(c))
+      clean += c;
+
+  // Check palindrome using two-pointer technique
+  int i = 0, j = clean.size() - 1;
+  bool isPalin = true;
+  while (i < j)
+  {
+    if (clean[i] != clean[j])
+    {
+      isPalin = false;
+      break;
+    }
+    i++;
+    j--;
+  }
+
+  if (isPalin)
+    cout << "The string is a palindrome.\n";
+  else
+    cout << "The string is not a palindrome.\n";
+
+  return 0;
+}
+
+/*
+Explanation:
+1. Convert everything to lowercase.
+2. Remove spaces and non-letter characters.
+3. Compare characters from start and end.
+
+Example:
+Input: "Madam, I'm Adam"
+After cleaning: "madamimadam" → Palindrome 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+*/
