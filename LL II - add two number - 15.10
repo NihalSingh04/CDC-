@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Function to add two numbers represented by linked lists
+Node* addTwoNumbers(Node* l1, Node* l2) {
+    Node* dummy = new Node{0, nullptr};
+    Node* curr = dummy;
+    int carry = 0;
+
+    while (l1 || l2 || carry) {
+        int sum = carry;
+        if (l1) { sum += l1->data; l1 = l1->next; }
+        if (l2) { sum += l2->data; l2 = l2->next; }
+        carry = sum / 10;
+        curr->next = new Node{sum % 10, nullptr};
+        curr = curr->next;
+    }
+
+    return dummy->next;
+}
+
+void printList(Node* head) {
+    while (head) {
+        cout << head->data << " -> ";
+        head = head->next;
+    }
+    cout << "NULL\n";
+}
+
+int main() {
+    Node* num1 = new Node{2, new Node{4, new Node{3, nullptr}}}; // 342
+    Node* num2 = new Node{5, new Node{6, new Node{4, nullptr}}}; // 465
+    Node* sum = addTwoNumbers(num1, num2); // 807
+    cout << "Sum List: ";
+    printList(sum);
+    return 0;
+}
