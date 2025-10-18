@@ -1,0 +1,40 @@
+#include <iostream>
+#include <unordered_set>
+#include <string>
+using namespace std;
+
+int main()
+{
+  string s;
+  cout << "Enter a string: ";
+  getline(cin, s);
+
+  string result = "";
+  unordered_set<char> seen;
+
+  for (char c : s)
+  {
+    if (seen.find(c) == seen.end())
+    {
+      result += c;
+      seen.insert(c);
+    }
+  }
+
+  cout << "String after removing duplicates: " << result << endl;
+
+  return 0;
+}
+
+/*
+Explanation:
+- Use a set to track which characters appeared.
+- Append only unseen characters to result.
+
+Example:
+Input: "programming"
+Output: "progamin"
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+*/
