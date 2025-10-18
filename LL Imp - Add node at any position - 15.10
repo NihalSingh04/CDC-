@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* createNode(int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = nullptr;
+    return newNode;
+}
+
+void addNode(Node*& head, int value, int position) {
+    Node* newNode = createNode(value);
+    if (position == 1) {
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+    Node* temp = head;
+    for (int i = 1; i < position - 1 && temp != nullptr; i++) temp = temp->next;
+    if (temp == nullptr) {
+        cout << "Position out of bounds!\n";
+        delete newNode;
+        return;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void printList(Node* head) {
+    while (head) {
+        cout << head->data << " -> ";
+        head = head->next;
+    }
+    cout << "NULL\n";
+}
+
+int main() {
+    Node* head = nullptr;
+    addNode(head, 10, 1);
+    addNode(head, 20, 2);
+    addNode(head, 15, 2);
+    cout << "Linked List: ";
+    printList(head);
+    return 0;
+}
