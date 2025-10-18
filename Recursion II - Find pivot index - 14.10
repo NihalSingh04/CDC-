@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to calculate total sum recursively
+int totalSum(vector<int> &nums, int i = 0)
+{
+  if (i == nums.size())
+    return 0;
+  return nums[i] + totalSum(nums, i + 1);
+}
+
+// Recursive function to find pivot index
+int findPivotRec(vector<int> &nums, int i, int leftSum, int total)
+{
+  if (i == nums.size())
+    return -1; // base case
+
+  int rightSum = total - leftSum - nums[i];
+  if (leftSum == rightSum)
+    return i; // pivot found
+
+  // Move to next index
+  return findPivotRec(nums, i + 1, leftSum + nums[i], total);
+}
+
+int main()
+{
+  vector<int> nums = {1, 7, 3, 6, 5, 6};
+  int total = totalSum(nums);
+  int pivot = findPivotRec(nums, 0, 0, total);
+
+  if (pivot != -1)
+    cout << "Pivot Index: " << pivot << endl;
+  else
+    cout << "No pivot index found." << endl;
+
+  return 0;
+}
+
+/*
+Explanation:
+- The pivot index is where the sum of elements on the left
+  equals the sum of elements on the right.
+- We calculate total sum once, and recursively check each index.
+
+Time Complexity: O(n)
+Space Complexity: O(n)  (due to recursion)
+*/
