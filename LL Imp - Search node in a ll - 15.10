@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+bool searchNode(Node* head, int value) {
+    while (head) {
+        if (head->data == value) return true;
+        head = head->next;
+    }
+    return false;
+}
+
+int main() {
+    Node* head = new Node{10, new Node{20, new Node{30, nullptr}}};
+    int key = 20;
+    if (searchNode(head, key))
+        cout << key << " found in the list.\n";
+    else
+        cout << key << " not found in the list.\n";
+    return 0;
+}
