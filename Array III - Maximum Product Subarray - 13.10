@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  vector<int> nums = {2, 3, -2, 4};
+
+  int maxProd = nums[0];
+  int currMax = nums[0];
+  int currMin = nums[0];
+
+  for (int i = 1; i < nums.size(); i++)
+  {
+    // If negative number, swap max & min
+    if (nums[i] < 0)
+      swap(currMax, currMin);
+
+    // Either take the current number or extend the previous product
+    currMax = max(nums[i], currMax * nums[i]);
+    currMin = min(nums[i], currMin * nums[i]);
+
+    // Update global maximum product
+    maxProd = max(maxProd, currMax);
+  }
+
+  cout << "Maximum Product Subarray = " << maxProd << endl;
+  return 0;
+}
+
+/*
+Explanation:
+- Multiplying by a negative number flips the sign, so we keep track of both
+  max product and min product at every step.
+- Whenever we get a negative number, we swap them.
+- Keep updating global maximum.
+
+Example: [2,3,-2,4]
+  → Max product subarray = 6
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
